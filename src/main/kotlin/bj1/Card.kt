@@ -1,6 +1,20 @@
 package bj1
 
 class Card(val value: Int, val suit: Int) {
+
+    init {//constructor like
+        require(value in 1..13)
+        require(suit in 1..4)
+        //will throw illegal arg exception
+
+        //throwws illegal state exception
+        // check(value in 1..13)
+
+        //only happens when compiled with assertions enabled compilation parameter - these go away in prioduction
+        // assert(value in 1..13)
+
+    }
+
     val suitName: String
         get() = when (suit) {
             1 -> "Spades"
@@ -14,19 +28,20 @@ class Card(val value: Int, val suit: Int) {
         get() = when (value) {
             1 -> "Ace"
             in 2..10 -> value.toString()
-            11->"Jack"
-            12->"Queen"
-            13->"King"
+            11 -> "Jack"
+            12 -> "Queen"
+            13 -> "King"
 
             else -> throw IllegalStateException()
         }
 
-    val name:String get() = "$valueName of $suitName"
+    val name: String get() = "$valueName of $suitName"
 
-    val points:Int get() = when(value){
-        in 1..9 -> value
-        in 10..13 -> 10
-        else -> throw IllegalStateException()
-    }
+    val points: Int
+        get() = when (value) {
+            in 1..9 -> value
+            in 10..13 -> 10
+            else -> throw IllegalStateException()
+        }
 
 }

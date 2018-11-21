@@ -1,7 +1,9 @@
 package bj1
 
 import org.junit.Test
+import java.lang.IllegalArgumentException
 import kotlin.test.assertEquals
+import kotlin.test.fail
 
 class CardTest {
     @Test
@@ -25,8 +27,26 @@ class CardTest {
         assertEquals(10, c2.points)
 
 
+    }
 
+    @Test
+    fun testCardValuesMustOnlyBe1to13() {
+        try {
+            Card(14, 2)
+            fail("shouldn't get here")
+        } catch (e: IllegalArgumentException) {
+            //good
+        }
+    }
 
+    @Test
+    fun testSuitsMustOnlyBe1to4() {
+        try {
+            Card(1, 5)
+            fail("shouldn't get here")
+        } catch (e: IllegalArgumentException) {
+            //good
+        }
     }
 
     @Test
